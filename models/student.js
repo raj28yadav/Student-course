@@ -18,5 +18,5 @@ const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;
 
 // Student: (id: string, name: string, email: string)
-// Course: { id: string, title: string, capacity: number, enrolled Count: number}
+
 
