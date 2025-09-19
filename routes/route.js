@@ -14,7 +14,7 @@ router.post("/students", async(req, res) => {
         name, 
         email
     })
-    return res.render("success");
+    return res.redirect("/allcourses");
 
 });
 router.get("/courses", (req, res) => {
@@ -30,9 +30,12 @@ router.post("/courses", async(req, res) => {
     })
     return res.render("success");
 });
-
-
-
+router.get("/allcourses", async(req, res) => {
+    const courses = await Course.find({});
+    return res.render("allcourse", {
+        courses
+    });
+});
 
 module.exports = router;
 
