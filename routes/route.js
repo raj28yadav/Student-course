@@ -1,13 +1,12 @@
 const express = require("express");
 const Student = require("../models/student");
-const { model, mongo, default: mongoose } = require("mongoose");
+const Course = require("../models/course")
+const mongoose = require("mongoose");
 const router = express.Router();
-
-
 
 router.get("/students", (req, res) => {
     return res.render("home");
-})
+});
 router.post("/students", async(req, res) => {
     const { id, name, email} = req.body;
     const student = await Student.create({
@@ -17,13 +16,25 @@ router.post("/students", async(req, res) => {
     })
     return res.render("success");
 
-})
+});
+router.get("/courses", (req, res) => {
+    return res.render("course");
+});
+router.post("/courses", async(req, res) => {
+    const { id, title, capacity, enrolledCount } = req.body;
+    const course = await Course.create({
+        id,
+        title, 
+        capacity,
+        enrolledCount,
+    })
+    return res.render("success");
+});
+
+
 
 
 module.exports = router;
-
-
-
 
 
 
