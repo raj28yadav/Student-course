@@ -1,7 +1,9 @@
 const express = require("express");
 const Student = require("../models/student");
-const { model } = require("mongoose");
+const { model, mongo, default: mongoose } = require("mongoose");
 const router = express.Router();
+
+
 
 router.get("/students", (req, res) => {
     return res.render("home");
