@@ -1,24 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Enrollment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .course-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .course-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-card h3 {
+      margin: 8px 0 4px;
+      color: #444;
+    }
+
+    .course-card p {
+      margin: 0 0 10px;
+      color: #666;
+    }
+
+    .enroll-form {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .enroll-form label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .enroll-form input {
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .enroll-form input:focus {
+      border-color: #007bff;
+    }
+
+    .enroll-form button {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .enroll-form button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <% courses.forEach(course => { %>
-            <div>
-                <p> Course Id</p>
-                <%= course.id %>
-                <p> Course Title</p>
-                <%= course.title %>
-                <p> Course capacity</p>
-                <%= course.capacity %>
-                <p> Enrolled Count</p>
-                <%= course.enrolledCount %>
-                </div>
-        <% }) %>
-        </div>
+  <h1>Available Courses</h1>
+  <div class="course-container">
+    <% courses.forEach(course => { %>
+      <div class="course-card">
+        <h3>Course ID</h3>
+        <p><%= course.id %></p>
+
+        <h3>Title</h3>
+        <p><%= course.title %></p>
+
+        <h3>Capacity</h3>
+        <p><%= course.capacity %></p>
+
+        <h3>Enrolled</h3>
+        <p><%= course.enrolledCount %></p>
+
+        <form class="enroll-form" method="post" action="">
+          <label for="studentId">Student ID</label>
+          <input type="text" placeholder="Enter Student ID" name="studentId" required>
+
+          <label for="studentName">Student Name</label>
+          <input type="text" placeholder="Enter Name" name="studentName" required>
+
+          <button type="submit">Enroll</button>
+        </form>
+      </div>
+    <% }) %>
+  </div>
 </body>
 </html>

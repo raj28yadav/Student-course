@@ -37,6 +37,7 @@ router.get("/allcourses", async(req, res) => {
     });
 });
 
+
 module.exports = router;
 
 
