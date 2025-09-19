@@ -2,6 +2,7 @@ const express = require("express");
 const Student = require("../models/student");
 const Course = require("../models/course")
 const mongoose = require("mongoose");
+const Enroll = require("../models/enroll");
 const router = express.Router();
 
 router.get("/students", (req, res) => {
@@ -35,6 +36,36 @@ router.get("/allcourses", async(req, res) => {
     return res.render("allcourse", {
         courses
     });
+});
+router.post("/enroll", async (req, res) => {
+    const { studentId, courseId } = req.body;
+    const student = await Student.findOne({ id: studentId });
+    if(!student){
+      return res.status(404).send("Student not found");
+    }
+    const course = await Course.findOne({ id: courseId });
+    if(!course){
+      return res.status(404).send("Course not found");
+    }
+    const alreadyEnrolled = await Enroll.findOne({ studentId, courseId });
+    if(alreadyEnrolled){
+      return res.status(400).send("Student already enrolled in this course");
+    }
+    if(course.enrolledCount >= course.capacity){
+      return res.status(400).send("Course is full");
+    }
+    await Enroll.create({
+      courseName: course.title,
+      studentName: student.name,
+      courseId,
+      studentId,
+    });
+    await Course.findOneAndUpdate(
+      { id: courseId },
+      { $inc: { enrolledCount: 1 } },
+      { new: true }
+    );
+    return res.redirect("/allcourses");
 });
 
 

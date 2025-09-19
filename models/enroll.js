@@ -17,3 +17,5 @@ const enrollSchema = new mongoose.Schema({
         required: true,
     }
 })
+const Enroll = mongoose.model("Enroll", enrollSchema);
+module.exports = Enroll;
