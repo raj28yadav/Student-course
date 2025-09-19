@@ -8,7 +8,14 @@ const router = express.Router();
 router.get("/students", (req, res) => {
     return res.render("home");
 })
-router.post("/students", (req, res) => {
+router.post("/students", async(req, res) => {
+    const { id, name, email} = req.body;
+    const student = await Student.create({
+        id,
+        name, 
+        email
+    })
+    return res.render("success");
 
 })
 
