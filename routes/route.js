@@ -68,12 +68,22 @@ router.post("/enroll", async (req, res) => {
     return res.redirect("/allcourses");
 });
 router.get("/students/:id/courses", async (req, res) => {
-    const Id = req.params.id;
+    const studentId = req.params.id;
     const courses = await Enroll.find(
-        {Id : Enroll.studentId}
+        { studentId: studentId }
     );
-    return res.render("enrollcourse", {
-        courses
+    res.render("enrollcourse", { 
+        courses 
+    });
+});
+
+router.get("/courses/:id/students", async(req, res) => {
+    const courseId = req.params.id;
+    const students = await Enroll.find(
+        { courseId: courseId }
+    );
+    return res.render("enrollstudent", {
+        students
     });
 });
 
