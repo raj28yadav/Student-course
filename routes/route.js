@@ -67,6 +67,15 @@ router.post("/enroll", async (req, res) => {
     );
     return res.redirect("/allcourses");
 });
+router.get("/students/:id/courses", async (req, res) => {
+    const Id = req.params.id;
+    const courses = await Enroll.find(
+        {Id : Enroll.studentId}
+    );
+    return res.render("enrollcourse", {
+        courses
+    });
+});
 
 
 module.exports = router;
