@@ -86,6 +86,22 @@ router.get("/courses/:id/students", async(req, res) => {
         students
     });
 });
+router.get("/allenroll", async(req, res) => {
+    const allEnroll = await Enroll.find({});
+    return res.render("allenroll", {
+        allEnroll,
+    })
+});
+router.post("/unenroll", async(req, res) => {
+    const { courseId, _id } = req.body;
+    const course =  await Course.findOneAndUpdate(
+        { courseId: courseId},
+        {$inc: {enrolledCount: -1}},
+        { new: true},
+    );
+    const enroll = await Enroll.findByIdAndDelete({_id});
+    return res.redirect("/allenroll");
+});
 
 
 module.exports = router;
