@@ -80,7 +80,7 @@
           <td><%= enroll.studentId %></td>
           <td>
             <form action="/unenroll" method="POST" style="display:inline;">
-            <input type="hidden" name="courseId" value="<%= enroll.courseId %>">
+            <input type="hidden" name="id" value="<%= enroll.courseId %>">
             <input type="hidden" name="_id" value="<%= enroll._id %>">
             <button type="submit" class="btn">Withdraw</button>
             </form>

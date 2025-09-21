@@ -93,9 +93,9 @@ router.get("/allenroll", async(req, res) => {
     })
 });
 router.post("/unenroll", async(req, res) => {
-    const { courseId, _id } = req.body;
+    const { id, _id } = req.body;
     const course =  await Course.findOneAndUpdate(
-        { courseId: courseId},
+        { id: id},
         {$inc: {enrolledCount: -1}},
         { new: true},
     );
